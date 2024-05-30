@@ -31,7 +31,7 @@ def deploy():
     # }
     #
     # Effectuer une requête POST pour mettre à jour le dépôt Git
-    git_pull_response = requests.post(git_pull_url, headers=headers)
+    # git_pull_response = requests.post(git_pull_url, headers=headers)
     #
     # # Effectuer une requête POST pour recharger l'application
     # reload_app_response = requests.post(reload_app_url, headers=headers)

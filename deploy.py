@@ -46,8 +46,7 @@ def deployReload(headers, reload_app_url):
 def deployOnAnyWhere():
     # Authentication information
     username = config['USER_GIT']
-    print(username)
-    api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
+    api_token = config['TOKEN_API']
     id = 34020282
     # PythonAnywhere API endpoints
     git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/consoles/{id}/send_input/"

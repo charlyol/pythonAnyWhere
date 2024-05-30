@@ -1,11 +1,18 @@
-
 # A very simple Bottle Hello World app for you to get started with...
-from bottle import default_app, route, run, template
+from bottle import default_app, route, run, template, request
+from diamond import create_diamond
 
 
 @route('/')
-def hello_world():
-    return template('home_page')
+def home():
+    # Get the letter from the query parameters
+    letter = request.query.get('letter', '')
+
+    # Generate the diamond using the provided letter
+    diamond_result = create_diamond(letter)
+
+    # Render the template with the diamond result
+    return template('home_page', diamond_result=diamond_result)
 
 
 application = default_app()

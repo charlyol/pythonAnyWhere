@@ -20,9 +20,9 @@ def deploy():
     # Informations d'authentification
     username = 'CharlyOlinger'
     api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
-
+    id= 34020282
     # Endpoints de l'API PythonAnywhere
-    git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/send_input/git\ pull/"
+    git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/consoles/{id}/send_input/git pull/"
     reload_app_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/webapps/CharlyOlinger.pythonanywhere.com/reload/"
 
     # En-têtes de requête avec l'authentification

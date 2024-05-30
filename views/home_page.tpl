@@ -13,8 +13,8 @@
         <input type="submit" name="generate" value="Generate">
     </form>
     <hr>
-    % if diamond_result:
+    {% if diamond_result %}
         <pre>{{ diamond_result }}</pre>
-    % endif
+    {% endif %}
 </body>
 </html>

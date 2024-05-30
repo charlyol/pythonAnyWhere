@@ -34,3 +34,7 @@ def create_line_of_diamond(i, letter):
     space_between = " " * (2 * (i - 2) + 1)
 
     return space_left + current_letter + space_between + current_letter
+
+
+if __name__ == "__main__":
+    print(create_diamond("Z"))

@@ -8,8 +8,11 @@ def home():
     # Get the letter from the query parameters
     letter = request.query.get('letter', '')
 
-    # Generate the diamond using the provided letter
-    diamond_result = create_diamond(letter)
+    try:
+        # Generate the diamond using the provided letter
+        diamond_result = create_diamond(letter)
+    except Exception as e:
+        diamond_result = str(e)
 
     # Render the template with the diamond result
     return template('home_page', diamond_result=diamond_result)

@@ -23,7 +23,7 @@ def deploy():
 
     # Endpoints de l'API PythonAnywhere
     git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/gitpull/"
-    reload_app_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/webapps/your_web_app_name/reload/"
+    reload_app_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/webapps/CharlyOlinger.pythonanywhere.com/reload/"
 
     # En-têtes de requête avec l'authentification
     headers = {

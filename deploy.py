@@ -37,15 +37,15 @@ def deploy():
     # reload_app_response = requests.post(reload_app_url, headers=headers)
     #
     # # Vérifier les réponses
-    # if git_pull_response.status_code == 200:
-    #     print("Dépôt Git mis à jour avec succès")
-    # else:
-    #     print(f"Échec de la mise à jour du dépôt Git : {git_pull_response.text}")
-    #
-    # if reload_app_response.status_code == 200:
-    #     print("Application rechargée avec succès")
-    # else:
-    #     print(f"Échec du rechargement de l'application : {reload_app_response.text}")
+    if git_pull_response.status_code == 200:
+        print("Dépôt Git mis à jour avec succès")
+    else:
+        print(f"Échec de la mise à jour du dépôt Git : {git_pull_response.text}")
+
+    if reload_app_response.status_code == 200:
+        print("Application rechargée avec succès")
+    else:
+        print(f"Échec du rechargement de l'application : {reload_app_response.text}")
 
 if __name__ == "__main__":
     deploy()

@@ -45,7 +45,7 @@ def deployReload(headers, reload_app_url):
 
 def deployOnAnyWhere():
     # Authentication information
-    username = os.environ.get('USERNAME')
+    username = os.environ.get('USER_GIT')
     print(username)
     api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
     id = 34020282

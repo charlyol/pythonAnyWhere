@@ -23,7 +23,7 @@ def deployChangeOnPythonAnyWhere():
         print("Git repository updated successfully")
 
         # Wait for Git to finish updating (adjust delay as needed)
-        time.sleep(20)  # Wait for 20 seconds
+        time.sleep(30)  # Wait for 30 seconds
 
         # Reload the application
         reload_app_response = deployReload(headers, reload_app_url)

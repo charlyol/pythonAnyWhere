@@ -22,7 +22,7 @@ def deploy():
     # api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
     #
     # # Endpoints de l'API PythonAnywhere
-    # git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/gitpull/"
+    git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/gitpull/"
     # reload_app_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/webapps/CharlyOlinger.pythonanywhere.com/reload/"
     #
     # # En-têtes de requête avec l'authentification
@@ -30,8 +30,8 @@ def deploy():
     #     "Authorization": f"Token {api_token}"
     # }
     #
-    # # Effectuer une requête POST pour mettre à jour le dépôt Git
-    # git_pull_response = requests.post(git_pull_url, headers=headers)
+    # Effectuer une requête POST pour mettre à jour le dépôt Git
+    git_pull_response = requests.post(git_pull_url, headers=headers)
     #
     # # Effectuer une requête POST pour recharger l'application
     # reload_app_response = requests.post(reload_app_url, headers=headers)

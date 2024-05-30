@@ -3,9 +3,9 @@ import subprocess
 import requests
 from datetime import datetime
 import time
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-load_dotenv()
+config = dotenv_values(".env")
 
 def deploy():
     # Deploy changes to local Git repository
@@ -45,7 +45,7 @@ def deployReload(headers, reload_app_url):
 
 def deployOnAnyWhere():
     # Authentication information
-    username = os.environ.get('USER_GIT')
+    username = config['USER_GIT']
     print(username)
     api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
     id = 34020282

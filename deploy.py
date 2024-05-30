@@ -20,7 +20,6 @@ def deploy():
         print(f"Échec de la mise à jour du dépôt Git : {git_pull_response.text}")
 
 
-
 def deployReload(headers, reload_app_url):
     # Effectuer une requête POST pour recharger l'application
     reload_app_response = requests.post(reload_app_url, headers=headers)
@@ -41,7 +40,7 @@ def deployOnAnyWhere():
     }
     # Corps de la requête avec la commande
     payload = {
-        "input": "git pull\n"
+        "input": "git pull\nls -al\n"
     }
     # Effectuer une requête POST pour mettre à jour le dépôt Git
     git_pull_response = requests.post(git_pull_url, headers=headers, data=payload)

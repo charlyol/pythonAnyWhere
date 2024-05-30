@@ -1,4 +1,3 @@
-
 import subprocess
 import requests
 from datetime import datetime
@@ -11,14 +10,13 @@ def deploy():
     # Vérifier les réponses
     if git_pull_response.status_code == 200:
         print("Dépôt Git mis à jour avec succès")
+        reload_app_response = deployReload(headers, reload_app_url)
+        if reload_app_response.status_code == 200:
+            print("Application rechargée avec succès")
+        else:
+            print(f"Échec du rechargement de l'application : {reload_app_response.text}")
     else:
         print(f"Échec de la mise à jour du dépôt Git : {git_pull_response.text}")
-
-    reload_app_response = deployReload(headers, reload_app_url)
-    if reload_app_response.status_code == 200:
-        print("Application rechargée avec succès")
-    else:
-        print(f"Échec du rechargement de l'application : {reload_app_response.text}")
 
 
 def deployReload(headers, reload_app_url):
@@ -41,7 +39,7 @@ def deployOnAnyWhere():
     }
     # Corps de la requête avec la commande
     payload = {
-        "input": "git pull\ntouch /var/www/charlyolinger_pythonanywhere_com_wsgi.py\n"
+        "input": "git pull\ntouch /var/www/CharlyOlinger_pythonanywhere_com_wsgi.py\n"
     }
     # Effectuer une requête POST pour mettre à jour le dépôt Git
     git_pull_response = requests.post(git_pull_url, headers=headers, data=payload)

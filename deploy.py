@@ -11,13 +11,15 @@ def deploy():
     # Vérifier les réponses
     if git_pull_response.status_code == 200:
         print("Dépôt Git mis à jour avec succès")
-        reload_app_response = deployReload(headers, reload_app_url)
-        if reload_app_response.status_code == 200:
-            print("Application rechargée avec succès")
-        else:
-            print(f"Échec du rechargement de l'application : {reload_app_response.text}")
     else:
         print(f"Échec de la mise à jour du dépôt Git : {git_pull_response.text}")
+    # Wait for the pull operation to complete
+    wait_for_pull_to_complete(pull_status_url, headers)
+    reload_app_response = deployReload(headers, reload_app_url)
+    if reload_app_response.status_code == 200:
+        print("Application rechargée avec succès")
+    else:
+        print(f"Échec du rechargement de l'application : {reload_app_response.text}")
 
 
 def deployReload(headers, reload_app_url):
@@ -40,7 +42,7 @@ def deployOnAnyWhere():
     }
     # Corps de la requête avec la commande
     payload = {
-        "input": "git pull\ntouch /var/www/CharlyOlinger_pythonanywhere_com_wsgi.py\n"
+        "input": "git pull\ntouch /var/www/charlyolinger_pythonanywhere_com_wsgi.py\n"
     }
     # Effectuer une requête POST pour mettre à jour le dépôt Git
     git_pull_response = requests.post(git_pull_url, headers=headers, data=payload)
@@ -60,6 +62,14 @@ def deployOnGit():
     subprocess.run(["git", "commit", "-m", commit_message], cwd=projet_path)
     subprocess.run(["git", "push"], cwd=projet_path)
 
-
+def wait_for_pull_to_complete(pull_status_url, headers):
+    while True:
+        response = requests.get(pull_status_url, headers=headers)
+        if response.status_code == 200 and response.json().get("status") == "completed":
+            print("Git pull operation completed")
+            break
+        else:
+            print("Waiting for Git pull operation to complete...")
+            time.sleep(5)  # Wait for 5 seconds before checking again
 if __name__ == "__main__":
     deploy()

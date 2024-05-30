@@ -1,8 +1,11 @@
+import os
 import subprocess
 import requests
 from datetime import datetime
 import time
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def deploy():
     # Deploy changes to local Git repository
@@ -19,7 +22,7 @@ def deployChangeOnPythonAnyWhere():
         print("Git repository updated successfully")
 
         # Wait for Git to finish updating (adjust delay as needed)
-        time.sleep(30)  # Wait for 30 seconds
+        time.sleep(10)  # Wait for 10 seconds
 
         # Reload the application
         reload_app_response = deployReload(headers, reload_app_url)
@@ -42,7 +45,7 @@ def deployReload(headers, reload_app_url):
 
 def deployOnAnyWhere():
     # Authentication information
-    username = 'CharlyOlinger'
+    username = os.environ.get('USERNAME')
     api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
     id = 34020282
     # PythonAnywhere API endpoints

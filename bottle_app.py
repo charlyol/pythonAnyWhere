@@ -1,11 +1,11 @@
 
 # A very simple Bottle Hello World app for you to get started with...
-from bottle import default_app, route, run
+from bottle import default_app, route, run, template
 
 
 @route('/')
 def hello_world():
-    return 'truitze \n 15648643645 \n 5189181561'
+    return template('home_page')
 
 
 application = default_app()

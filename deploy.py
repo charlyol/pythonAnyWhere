@@ -40,7 +40,7 @@ def deployOnAnyWhere():
     }
     # Corps de la requête avec la commande
     payload = {
-        "input": "git pull\nls -al\n"
+        "input": "git pull\ntouch /var/www/CharlyOlinger_pythonanywhere_com_wsgi.py\n"
     }
     # Effectuer une requête POST pour mettre à jour le dépôt Git
     git_pull_response = requests.post(git_pull_url, headers=headers, data=payload)

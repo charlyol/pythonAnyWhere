@@ -21,7 +21,7 @@ def create_body(letter):
 
 
 def value_of(letter):
-    return (ord(letter) - ord("A") + 1)
+    return ord(letter) - ord("A") + 1
 
 
 def create_line_a(letter):

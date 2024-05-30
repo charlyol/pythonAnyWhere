@@ -1,60 +1,73 @@
 import subprocess
 import requests
 from datetime import datetime
+import time
 
 
 def deploy():
+    # Deploy changes to local Git repository
     deployOnGit()
+
+    # Deploy changes to PythonAnywhere
     git_pull_response, headers, reload_app_url = deployOnAnyWhere()
 
-    # Vérifier les réponses
+    # Check responses
     if git_pull_response.status_code == 200:
-        print("Dépôt Git mis à jour avec succès")
+        # Git repository updated successfully
+        print("Git repository updated successfully")
+
+        # Wait for Git to finish updating (adjust delay as needed)
+        time.sleep(30)  # Wait for 30 seconds
+
+        # Reload the application
         reload_app_response = deployReload(headers, reload_app_url)
         if reload_app_response.status_code == 200:
-            print("Application rechargée avec succès")
+            # Application reloaded successfully
+            print("Application reloaded successfully")
         else:
-            print(f"Échec du rechargement de l'application : {reload_app_response.text}")
+            # Reload application failed
+            print(f"Failed to reload the application: {reload_app_response.text}")
     else:
-        print(f"Échec de la mise à jour du dépôt Git : {git_pull_response.text}")
+        # Failed to update Git repository
+        print(f"Failed to update Git repository: {git_pull_response.text}")
 
 
 def deployReload(headers, reload_app_url):
-    # Effectuer une requête POST pour recharger l'application
+    # Reload the application on PythonAnywhere
     reload_app_response = requests.post(reload_app_url, headers=headers)
     return reload_app_response
 
 
 def deployOnAnyWhere():
-    # Informations d'authentification
+    # Authentication information
     username = 'CharlyOlinger'
     api_token = '6c662ac265f1f9a47fa07f027bc52313e809e636'
     id = 34020282
-    # Endpoints de l'API PythonAnywhere
+    # PythonAnywhere API endpoints
     git_pull_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/consoles/{id}/send_input/"
     reload_app_url = f"https://www.pythonanywhere.com/api/v0/user/{username}/webapps/CharlyOlinger.pythonanywhere.com/reload/"
-    # En-têtes de requête avec l'authentification
+    # Request headers with authentication
     headers = {
         "Authorization": f"Token {api_token}"
     }
-    # Corps de la requête avec la commande
+    # Request body with command
     payload = {
         "input": "git pull\ntouch /var/www/CharlyOlinger_pythonanywhere_com_wsgi.py\n"
     }
-    # Effectuer une requête POST pour mettre à jour le dépôt Git
+    # Send POST request to update Git repository
     git_pull_response = requests.post(git_pull_url, headers=headers, data=payload)
     return git_pull_response, headers, reload_app_url
 
 
 def deployOnGit():
-    # Chemin local vers votre projet Bottle
+    # Local path to your Bottle project
     projet_path = "/home/olinger/PycharmProjects/pythonAnyWhere"
 
-    # Message de commit avec le timestamp
+    # Commit message with timestamp
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    commit_message = f"Déploiement automatique - {timestamp}"
+    commit_message = f"Automatic deployment - {timestamp}"
 
-    # Commandes Git pour ajouter, commettre et pousser les modifications
+    # Git commands to add, commit, and push changes
     subprocess.run(["git", "add", "."], cwd=projet_path)
     subprocess.run(["git", "commit", "-m", commit_message], cwd=projet_path)
     subprocess.run(["git", "push"], cwd=projet_path)

@@ -5,7 +5,7 @@ from bottle import default_app, route, run
 
 @route('/')
 def hello_world():
-    return 'Hello World ! This is the first page of the project.'
+    return 'fuck hello world !'
 
 
 application = default_app()

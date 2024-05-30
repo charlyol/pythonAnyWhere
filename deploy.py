@@ -7,6 +7,7 @@ from dotenv import dotenv_values
 
 config = dotenv_values(".env")
 
+
 def deploy():
     # Deploy changes to local Git repository
     deployOnGit()
@@ -22,7 +23,7 @@ def deployChangeOnPythonAnyWhere():
         print("Git repository updated successfully")
 
         # Wait for Git to finish updating (adjust delay as needed)
-        time.sleep(10)  # Wait for 10 seconds
+        time.sleep(15)  # Wait for 10 seconds
 
         # Reload the application
         reload_app_response = deployReload(headers, reload_app_url)
@@ -57,7 +58,7 @@ def deployOnAnyWhere():
     }
     # Request body with command
     payload = {
-        "input": "git pull\ntouch /var/www/CharlyOlinger_pythonanywhere_com_wsgi.py\n"
+        "input": "git pull\n"
     }
     # Send POST request to update Git repository
     git_pull_response = requests.post(git_pull_url, headers=headers, data=payload)

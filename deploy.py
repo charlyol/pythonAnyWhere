@@ -7,10 +7,12 @@ import time
 def deploy():
     # Deploy changes to local Git repository
     deployOnGit()
+    deployChangeOnPythonAnyWhere()
 
+
+def deployChangeOnPythonAnyWhere():
     # Deploy changes to PythonAnywhere
     git_pull_response, headers, reload_app_url = deployOnAnyWhere()
-
     # Check responses
     if git_pull_response.status_code == 200:
         # Git repository updated successfully
